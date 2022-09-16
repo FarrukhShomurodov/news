@@ -1,0 +1,35 @@
+.login,
+.admin {
+    transition: 0.3s;
+}
+.login_register_add_new {
+    background-color: black;
+    border: none;
+    color: white;
+}
+.login_register_add_new:hover {
+    color: white;
+}
+.navbar {
+    background-color: black;
+}
+.nav_link {
+    color: white;
+}
+li {
+    display: inline;
+    margin-left: 10px;
+}
+a:hover {
+    text-decoration: none;
+    color: white;
+}
+textarea {
+    resize: none;
+}
+.newsCategory{
+    border-top: 1px solid black;
+}
+.tag{
+    width: 120px;
+}
