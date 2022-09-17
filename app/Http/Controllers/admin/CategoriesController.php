@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CategoryRequest;
 use App\Models\Category;
+use App\Service\CategoryService;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class CategoriesController extends Controller
@@ -12,6 +15,12 @@ class CategoriesController extends Controller
      * Display a listing of the resource.
      *
      */
+    private CategoryService $categoryService;
+    public function __construct(CategoryService $category)
+    {
+        $this->categoryService = $category;
+    }
+
     public function index()
     {
         return view('admin.categories.index',[
@@ -31,14 +40,12 @@ class CategoriesController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param CategoryRequest $request
+     * @return RedirectResponse
      */
-    public function store(Request $request)
+    public function store(CategoryRequest $request)
     {
-        $category = new Category;
-        $category->category_name = $request["category_name"];
-        $category->save();
+        $this->categoryService->store($request->validate());
         return redirect()->route('login.admin.categories.index');
     }
 
@@ -73,11 +80,9 @@ class CategoriesController extends Controller
      * @param  int  $id
 
      */
-    public function update(Request $request, $id)
+    public function update(CategoryRequest $request,Category $category)
     {
-        $category = Category::find($id);
-        $category->category_name = $request["category_name"];
-        $category->update();
+        $this->categoryService->update($request->validate(),$category);
         return redirect()->route('login.admin.categories.index');
     }
 
@@ -87,9 +92,9 @@ class CategoriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Category $category)
     {
-        Category::destroy($id);
+        $this->categoryService->destroy($category);
         return redirect()->route('login.admin.categories.index');
     }
 }

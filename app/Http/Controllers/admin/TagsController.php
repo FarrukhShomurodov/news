@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\TagRequest;
 use App\Models\Tag;
+use App\Service\TagsService;
 use Illuminate\Http\Request;
 
 class TagsController extends Controller
@@ -12,6 +14,12 @@ class TagsController extends Controller
      * Display a listing of the resource.
      *
      */
+    private $tagServicel;
+    public function __construct(TagsService $tag)
+    {
+        $this->tagServicel = $tag;
+    }
+
     public function index()
     {
          return view('admin.tags.index',[
@@ -35,11 +43,9 @@ class TagsController extends Controller
      * @param  \Illuminate\Http\Request  $request
 
      */
-    public function store(Request $request)
+    public function store(TagRequest $request)
     {
-        $category = new Tag;
-        $category->tag_name = $request["tag_name"];
-        $category->save();
+        $this->tagServicel->store($request->validate());
         return redirect()->route('login.admin.tags.index');
     }
 
@@ -72,11 +78,9 @@ class TagsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      */
-    public function update(Request $request, $id)
+    public function update(TagRequest $request, Tag $tag)
     {
-        $tag = Tag::find($id);
-        $tag->tag_name = $request["tag_name"];
-        $tag->update();
+        $this->tagServicel->update($request->validate(), $tag);
         return redirect()->route('login.admin.tags.index');
     }
 
@@ -85,9 +89,9 @@ class TagsController extends Controller
      *
      * @param  int  $id
      */
-    public function destroy($id)
+    public function destroy(Tag $tag)
     {
-        Tag::destroy($id);
+        $this->tagServicel->destroy($tag);
         return redirect()->route('login.admin.tags.index');
     }
 }

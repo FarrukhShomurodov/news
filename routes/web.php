@@ -47,8 +47,8 @@ Route::group(['middleware' => 'auth'], function () {
                 Route::get('create',[CategoriesController::class, "create"])->name("create");
                 Route::post('store',[CategoriesController::class, "store"])->name("store");
                 Route::get('edit/{id}',[CategoriesController::class, "edit"])->name("edit");
-                Route::put('update/{id}',[CategoriesController::class, "update"])->name("update");
-                Route::get('destroy/{id}',[CategoriesController::class, "destroy"])->name("destroy");
+                Route::put('update/{category}',[CategoriesController::class, "update"])->name("update");
+                Route::get('destroy/{category}',[CategoriesController::class, "destroy"])->name("destroy");
             });
             Route::group([
                 'as'=>'tags.',
@@ -58,8 +58,8 @@ Route::group(['middleware' => 'auth'], function () {
                 Route::get('create',[TagsController::class, "create"])->name("create");
                 Route::post('store',[TagsController::class, "store"])->name("store");
                 Route::get('edit/{id}',[TagsController::class, "edit"])->name("edit");
-                Route::put('update/{id}',[TagsController::class, "update"])->name("update");
-                Route::get('destroy/{id}',[TagsController::class, "destroy"])->name("destroy");
+                Route::put('update/{tag}',[TagsController::class, "update"])->name("update");
+                Route::get('destroy/{tag}',[TagsController::class, "destroy"])->name("destroy");
             });
             Route::group([
                 'as' => 'posts.',

@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class ApiController extends Controller
 {
     public function posts($id){
-        $posts = Post::find($id);
+        $posts = Post::findOrFail($id);
         return response($posts);
     }
 }
