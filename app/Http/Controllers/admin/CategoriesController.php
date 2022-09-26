@@ -23,8 +23,9 @@ class CategoriesController extends Controller
 
     public function index()
     {
+        $category = Category::all();
         return view('admin.categories.index',[
-            'categories' => Category::all()
+            'categories' => $category,
         ]);
     }
 
@@ -45,7 +46,7 @@ class CategoriesController extends Controller
      */
     public function store(CategoryRequest $request)
     {
-        $this->categoryService->store($request->validate());
+        $this->categoryService->store($request->validated());
         return redirect()->route('login.admin.categories.index');
     }
 
@@ -68,8 +69,9 @@ class CategoriesController extends Controller
      */
     public function edit($id)
     {
+        $category = Category::find($id);
         return view('admin.categories.edit',[
-            'category' => Category::find($id),
+            'category' => $category,
         ]);
     }
 
@@ -90,9 +92,8 @@ class CategoriesController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
-    public function destroy(Category $category)
+    public function destroy(Category $category): RedirectResponse
     {
         $this->categoryService->destroy($category);
         return redirect()->route('login.admin.categories.index');

@@ -12,6 +12,7 @@ use App\Service\AdminService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use PhpParser\Node\Expr\PostDec;
 
 class PostsController extends Controller
 {
@@ -29,8 +30,9 @@ class PostsController extends Controller
 
     public function index()
     {
+        $posts = Post::all();
         return view('admin.posts.index',[
-            'posts' => Post::all()
+            'posts' => $posts,
         ]);
     }
 
@@ -40,9 +42,11 @@ class PostsController extends Controller
      */
     public function create()
     {
+        $categories = Category::all();
+        $tags = Tag::all();
         return view('admin.posts.create',[
-            'categories' => Category::all(),
-            'tags' => Tag::all(),
+            'categories' => $categories,
+            'tags' => $tags,
         ]);
     }
 
@@ -78,11 +82,12 @@ class PostsController extends Controller
      */
     public function edit(Post $post)
     {
-
+        $categories = Category::all();
+        $tags = Tag::all();
         return view('admin.posts.edit',[
             'post'=> $post,
-            'categories' => Category::all(),
-            'tags' => Tag::all(),
+            'categories' =>$categories,
+            'tags' =>  $tags,
         ]);
     }
 

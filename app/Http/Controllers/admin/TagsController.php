@@ -22,6 +22,7 @@ class TagsController extends Controller
 
     public function index()
     {
+        $tags = Tag
          return view('admin.tags.index',[
             'tags' => Tag::all()
             ]);
@@ -45,7 +46,7 @@ class TagsController extends Controller
      */
     public function store(TagRequest $request)
     {
-        $this->tagServicel->store($request->validate());
+        $this->tagServicel->store($request->validated());
         return redirect()->route('login.admin.tags.index');
     }
 

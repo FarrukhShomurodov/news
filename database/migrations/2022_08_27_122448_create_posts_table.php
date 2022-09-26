@@ -18,7 +18,7 @@ class CreatePostsTable extends Migration
             $table->string('title');
             $table->string('title_description', 65535);
             $table->foreignId('category_id');
-            $table->string('description', 65535);
+            $table->text('description');
             $table->string("title_image");
             $table->timestamps();
         });
