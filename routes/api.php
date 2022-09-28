@@ -3,8 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\api\CategoriesController;
-use App\Http\Controllers\apache_child_terminate\TagsController;
-
+use App\Http\Controllers\api\TagsController;
+use App\Http\Controllers\api\PostsController;
 /*
 |--------------------------------------------------------------------------
 | API Routes

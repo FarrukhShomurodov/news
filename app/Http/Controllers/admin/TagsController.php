@@ -80,7 +80,7 @@ class TagsController extends Controller
      */
     public function update(TagRequest $request, Tag $tag)
     {
-        $this->tagServicel->update($request->validate(), $tag);
+        $this->tagServicel->update($request->validated(), $tag);
         return redirect()->route('login.admin.tags.index');
     }
 

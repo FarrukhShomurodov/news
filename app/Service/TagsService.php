@@ -12,7 +12,6 @@ class TagsService{
         $tags = new Tag();
         $tags->tag_name = $validated["tag_name"];
         $tags->save();
-        return redirect()->route('login.admin.categories.index');
 
     }
     public function update($validated, $tag)
