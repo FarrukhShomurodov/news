@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\admin;
+namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CategoryRequest;
@@ -28,16 +28,6 @@ class CategoriesController extends Controller
             'categories' => $category,
         ]);
     }
-
-    /**
-     * Show the form for creating a new resource.
-
-     */
-    public function create()
-    {
-        return view('admin.categories.create');
-    }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -47,32 +37,7 @@ class CategoriesController extends Controller
     public function store(CategoryRequest $request)
     {
         $this->categoryService->store($request->validated());
-        return redirect()->route('login.admin.categories.index');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-
-     */
-    public function edit($id)
-    {
-        $category = Category::find($id);
-        return view('admin.categories.edit',[
-            'category' => $category,
-        ]);
+        return response(200);
     }
 
     /**
@@ -85,7 +50,7 @@ class CategoriesController extends Controller
     public function update(CategoryRequest $request,Category $category)
     {
         $this->categoryService->update($request->validated(),$category);
-        return redirect()->route('login.admin.categories.index');
+        return response(200);
     }
 
     /**
@@ -96,6 +61,6 @@ class CategoriesController extends Controller
     public function destroy(Category $category): RedirectResponse
     {
         $this->categoryService->destroy($category);
-        return redirect()->route('login.admin.categories.index');
+        return response(200);
     }
 }

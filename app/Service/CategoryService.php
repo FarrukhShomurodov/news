@@ -11,8 +11,6 @@ class CategoryService{
         $category = new Category;
         $category->category_name = $validated["category_name"];
         $category->save();
-        return redirect()->route('login.admin.categories.index');
-
     }
     public function update($validated, $category)
     {

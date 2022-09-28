@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\admin;
+namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\TagRequest;
@@ -26,17 +26,6 @@ class TagsController extends Controller
             'tags' => Tag::all()
             ]);
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-
-     */
-    public function create()
-    {
-        return view('admin.tags.create');
-    }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -46,32 +35,8 @@ class TagsController extends Controller
     public function store(TagRequest $request)
     {
         $this->tagServicel->store($request->validated());
-        return redirect()->route('login.admin.tags.index');
+        return response(200);
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     */
-    public function edit($id)
-    {
-        return view('admin.tags.edit',[
-            'tag' => Tag::find($id),
-        ]);
-    }
-
     /**
      * Update the specified resource in storage.
      *
@@ -81,7 +46,7 @@ class TagsController extends Controller
     public function update(TagRequest $request, Tag $tag)
     {
         $this->tagServicel->update($request->validate(), $tag);
-        return redirect()->route('login.admin.tags.index');
+        return response(200);
     }
 
     /**
@@ -92,6 +57,6 @@ class TagsController extends Controller
     public function destroy(Tag $tag)
     {
         $this->tagServicel->destroy($tag);
-        return redirect()->route('login.admin.tags.index');
+        return response(200);
     }
 }
