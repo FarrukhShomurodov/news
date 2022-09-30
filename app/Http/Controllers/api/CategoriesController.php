@@ -8,6 +8,7 @@ use App\Models\Category;
 use App\Service\CategoryService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use App\Http\Resources\CategoriesResource;
 
 class CategoriesController extends Controller
 {
@@ -37,7 +38,8 @@ class CategoriesController extends Controller
     public function store(CategoryRequest $request)
     {
         $this->categoryService->store($request->validated());
-        return response(200);
+        return new CategoriesResource($request);
+        
     }
 
     /**
@@ -50,7 +52,7 @@ class CategoriesController extends Controller
     public function update(CategoryRequest $request,Category $category)
     {
         $this->categoryService->update($request->validated(),$category);
-        return response(200);
+        return new CategoriesResource($request);
     }
 
     /**

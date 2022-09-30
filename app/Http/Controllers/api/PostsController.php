@@ -13,6 +13,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use PhpParser\Node\Expr\PostDec;
+use App\Http\Resources\PostsResource;
 
 class PostsController extends Controller
 {
@@ -44,8 +45,7 @@ class PostsController extends Controller
     {
 
         $this->postsService->create($request->validated());
-
-        return response(200);
+        return new PostsResource($request);
     }
     /**
      * Update the specified resource in storage.
@@ -57,7 +57,7 @@ class PostsController extends Controller
     public function update(PostRequest $request, Post $post): RedirectResponse
     {
         $this->postsService->update($request->validated(), $post);
-        return response(200);
+        return new PostsResource($request);
     }
 
     /**

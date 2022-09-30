@@ -7,6 +7,7 @@ use App\Http\Requests\TagRequest;
 use App\Models\Tag;
 use App\Service\TagsService;
 use Illuminate\Http\Request;
+use App\Http\Resources\TagsResource;
 
 class TagsController extends Controller
 {
@@ -35,7 +36,7 @@ class TagsController extends Controller
     public function store(TagRequest $request)
     {
         $this->tagServicel->store($request->validated());
-        return response(200);
+        return new TagsResource($request);
     }
     /**
      * Update the specified resource in storage.
@@ -46,7 +47,7 @@ class TagsController extends Controller
     public function update(TagRequest $request, Tag $tag)
     {
         $this->tagServicel->update($request->validated(), $tag);
-        return response(200);
+        return new TagsResource($request);
     }
 
     /**

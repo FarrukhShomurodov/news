@@ -57,7 +57,6 @@ class PostsController extends Controller
      */
     public function store(PostRequest $request)
     {
-
         $this->postsService->create($request->validated());
 
         return redirect()->route('login.admin.posts.index');
